@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import List
 
+import numpy as np
 import streamlit as st
 
 from .grid import Grid, CellType
@@ -27,10 +28,24 @@ def grid_to_color_matrix(grid: Grid) -> List[List[str]]:
     return matrix
 
 
+def hex_to_rgb(hex_color: str) -> tuple[int, int, int]:
+    """Convert a hex color string to an RGB tuple."""
+    hex_color = hex_color.lstrip("#")
+    return tuple(int(hex_color[i : i + 2], 16) for i in (0, 2, 4))
+
+
+def grid_to_rgb_array(grid: Grid, cell_size: int = 10) -> np.ndarray:
+    """Return a scaled RGB array representing the grid."""
+    arr = np.zeros((grid.HEIGHT, grid.WIDTH, 3), dtype=np.uint8)
+    for y in range(grid.HEIGHT):
+        for x in range(grid.WIDTH):
+            arr[y, x] = hex_to_rgb(CELL_COLORS[grid.get_cell(x, y).type])
+    if cell_size > 1:
+        arr = np.kron(arr, np.ones((cell_size, cell_size, 1), dtype=np.uint8))
+    return arr
+
+
 def render_grid(grid: Grid) -> None:
     """Render the grid using Streamlit."""
-    matrix = grid_to_color_matrix(grid)
-    for row in matrix:
-        cols = st.columns(len(row))
-        for col, color in zip(cols, row):
-            col.button(" ", key=f"cell-{col}-{color}", help=color, disabled=True)
+    arr = grid_to_rgb_array(grid, cell_size=10)
+    st.image(arr, use_column_width=True)

@@ -1,6 +1,6 @@
 import pytest
 from miney.grid import Grid, CellType
-from miney.ui import grid_to_color_matrix, CELL_COLORS
+from miney.ui import grid_to_rgb_array, CELL_COLORS, hex_to_rgb
 
 
 def test_grid_initialization():
@@ -23,10 +23,10 @@ def test_out_of_bounds():
     with pytest.raises(IndexError):
         grid.set_cell_type(100, 100, CellType.ROAD)
 
-def test_grid_to_color_matrix():
+def test_grid_to_rgb_array():
     grid = Grid()
     grid.set_cell_type(0, 0, CellType.LOAD)
-    matrix = grid_to_color_matrix(grid)
-    assert matrix[0][0] == CELL_COLORS[CellType.LOAD]
-    assert len(matrix) == grid.HEIGHT
-    assert len(matrix[0]) == grid.WIDTH
+    arr = grid_to_rgb_array(grid, cell_size=1)
+    assert tuple(arr[0, 0]) == hex_to_rgb(CELL_COLORS[CellType.LOAD])
+    assert arr.shape[0] == grid.HEIGHT
+    assert arr.shape[1] == grid.WIDTH

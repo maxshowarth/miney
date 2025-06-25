@@ -29,10 +29,11 @@ From the repository root, launch the editor interface with:
 streamlit run app.py
 ```
 
-If everything is working you should see a 50x50 grid. A grey road runs
-across the middle row with a green cell at the far left (the load zone)
-and a red cell at the far right (the dump zone). The layout is loaded
-from `maps/simple_map.json` and can be replaced with other map files.
+If everything is working you should see a 50x50 grid rendered as a single
+image, not a matrix of buttons. A grey road runs across the middle row with a
+green cell at the far left (the load zone) and a red cell at the far right (the
+dump zone). The layout is loaded from `maps/simple_map.json` and can be replaced
+with other map files.
 
 ## Testing
 Run unit tests with:
