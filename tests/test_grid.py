@@ -1,0 +1,36 @@
+from miney.grid import Grid, CellType
+
+
+def test_grid_initialization():
+    grid = Grid()
+    assert grid.WIDTH == 50
+    assert grid.HEIGHT == 50
+    for y in range(grid.HEIGHT):
+        for x in range(grid.WIDTH):
+            assert grid.get_cell(x, y).type == CellType.EMPTY
+
+
+def test_set_and_get_cell():
+    grid = Grid()
+    grid.set_cell_type(1, 2, CellType.ROAD)
+    assert grid.get_cell(1, 2).type == CellType.ROAD
+
+
+def test_out_of_bounds():
+    grid = Grid()
+    try:
+        grid.set_cell_type(100, 100, CellType.ROAD)
+    except IndexError:
+        pass
+    else:
+        assert False, "Expected IndexError for out-of-bounds coordinates"
+from miney.ui import grid_to_color_matrix, CELL_COLORS
+
+
+def test_grid_to_color_matrix():
+    grid = Grid()
+    grid.set_cell_type(0, 0, CellType.LOAD)
+    matrix = grid_to_color_matrix(grid)
+    assert matrix[0][0] == CELL_COLORS[CellType.LOAD]
+    assert len(matrix) == grid.HEIGHT
+    assert len(matrix[0]) == grid.WIDTH
