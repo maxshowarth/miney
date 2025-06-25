@@ -30,3 +30,9 @@ def test_grid_to_rgb_array():
     assert tuple(arr[0, 0]) == hex_to_rgb(CELL_COLORS[CellType.LOAD])
     assert arr.shape[0] == grid.HEIGHT
     assert arr.shape[1] == grid.WIDTH
+
+
+def test_empty_cell_color():
+    grid = Grid()
+    arr = grid_to_rgb_array(grid, cell_size=1)
+    assert tuple(arr[0, 0]) == hex_to_rgb(CELL_COLORS[CellType.EMPTY])

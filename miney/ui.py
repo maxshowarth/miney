@@ -9,7 +9,7 @@ from .grid import Grid, CellType
 
 
 CELL_COLORS = {
-    CellType.EMPTY: "#FFFFFF",
+    CellType.EMPTY: "#D2B48C",
     CellType.ROAD: "#A0A0A0",
     CellType.LOAD: "#00FF00",
     CellType.DUMP: "#FF0000",
@@ -48,4 +48,4 @@ def grid_to_rgb_array(grid: Grid, cell_size: int = 10) -> np.ndarray:
 def render_grid(grid: Grid) -> None:
     """Render the grid using Streamlit."""
     arr = grid_to_rgb_array(grid, cell_size=10)
-    st.image(arr, use_column_width=True)
+    st.image(arr, use_container_width=True)

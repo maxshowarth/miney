@@ -23,10 +23,11 @@ pip install -r requirements.txt
 ```
 
 ## Running the app
-From the repository root, launch the editor interface with:
+From the repository root, launch the editor interface in development mode so
+changes are picked up automatically:
 
 ```bash
-streamlit run app.py
+streamlit run app.py --server.runOnSave=true
 ```
 
 If everything is working you should see a 50x50 grid rendered as a single
