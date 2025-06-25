@@ -6,7 +6,7 @@ See `PROJECT_REQUIREMENTS.md` for the full project specification.
 ## Requirements
 The project requires Python 3.10 or newer and the following packages:
 
-- [Streamlit](https://streamlit.io)
+- [Pygame](https://www.pygame.org/) (UI)
 - [pytest](https://docs.pytest.org/)
 - [NumPy](https://numpy.org/) (math utilities)
 - [NetworkX](https://networkx.org/) (future pathfinding)
@@ -23,20 +23,19 @@ pip install -r requirements.txt
 ```
 
 ## Running the app
-From the repository root, launch the editor interface in development mode so
-changes are picked up automatically:
+Run the simulation with the Pygame interface using:
 
 ```bash
-streamlit run app.py --server.runOnSave=true
+python app.py
 ```
 
-If everything is working you should see a 50x50 grid rendered as a single
-image, not a matrix of buttons. A grey road runs across the middle row with a
-green cell at the far left (the load zone) and a red cell at the far right (the
-dump zone). The layout is loaded from `maps/simple_map.json` and can be replaced
-with other map files. The interface also provides buttons to start or stop the
-simulation, reset all trucks, and spawn additional trucks. Truck positions are
-displayed on the grid as yellow squares.
+A window will open showing the 50x50 grid. Use the following keys:
+
+- **Space** – Start/stop the simulation
+- **R** – Reset all trucks
+- **A** – Add a new truck
+
+Truck positions are displayed as yellow squares moving along the road between the load (green) and dump (red) cells.
 
 ## Testing
 Run unit tests with:
@@ -50,19 +49,19 @@ The `miney.simulation` module contains a simple truck engine. Trucks follow a
 pre-computed looped route from the load cell to the dump cell and back again.
 Each truck waits for a configurable number of ticks at the load and dump
 locations before continuing its journey.
-The Streamlit app visualizes the simulation in real time using yellow
-markers for trucks. Buttons allow you to start or stop the engine, add
-new trucks and reset the fleet.
+A small Pygame window visualizes the simulation in real time using yellow
+markers for trucks. Keyboard shortcuts allow you to start/stop the engine,
+add new trucks and reset the fleet.
 
 ## Project Details
-This project involves developing a Python-based, interactive 2D mine simulation application. The app models haul trucks moving between a loading ground and dumping ground on a user-defined road network within a 50×50 grid. The simulation will be visualized in a Streamlit or Gradio interface and allow basic controls (start, reset, add trucks). Truck motion is governed by pathfinding logic. This tool is intended for demonstration purposes and educational use.
+This project involves developing a Python-based, interactive 2D mine simulation application. The app models haul trucks moving between a loading ground and dumping ground on a user-defined road network within a 50×50 grid. The simulation will be visualized in a Pygame interface and allow basic controls (start, reset, add trucks). Truck motion is governed by pathfinding logic. This tool is intended for demonstration purposes and educational use.
 
 The agent is expected to break the project into appropriately sized tasks and implement them incrementally, submitting changes as a series of pull requests. Each PR must include comprehensive unit tests and should be reviewable from a TDD perspective. Tasks should follow a test-driven development strategy: define the tests, then implement the functionality, and finally verify that all tests pass.
 
 📦 Technical Constraints
 Language: Python 3.10+
 
-UI Framework: Streamlit (preferred) or Gradio for 2D visualization and interactivity
+UI Framework: Pygame for 2D visualization and interactivity
 
 Visualization: Grid-based (50x50); click-and-drag interface to define roads
 
@@ -147,7 +146,7 @@ Trucks moving in real time
 
 Optional overlays: truck IDs, states, route paths
 
-Framework: Use Streamlit unless otherwise directed
+Framework: Use Pygame
 
 ✅ Non-Functional Requirements
 No internet connection should be required after install.
@@ -167,7 +166,7 @@ Pathfinding algorithm (A*)
 
 Truck lifecycle and state transitions
 
-UI component functions (mocking Streamlit as needed)
+UI component functions (mocking Pygame as needed)
 
 All PRs must pass tests before merge.
 

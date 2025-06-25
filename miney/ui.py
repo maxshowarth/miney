@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import List
 
 import numpy as np
-import streamlit as st
 
 from .grid import Grid, CellType
 
@@ -47,12 +46,6 @@ def grid_to_rgb_array(grid: Grid, cell_size: int = 10) -> np.ndarray:
     return arr
 
 
-def render_grid(grid: Grid) -> None:
-    """Render the grid using Streamlit."""
-    arr = grid_to_rgb_array(grid, cell_size=10)
-    st.image(arr, use_container_width=True)
-
-
 def simulation_to_rgb_array(sim, cell_size: int = 10) -> np.ndarray:
     """Return an RGB array representing the grid with trucks overlaid."""
     arr = grid_to_rgb_array(sim.grid, cell_size=1)
@@ -64,9 +57,3 @@ def simulation_to_rgb_array(sim, cell_size: int = 10) -> np.ndarray:
     if cell_size > 1:
         arr = np.kron(arr, np.ones((cell_size, cell_size, 1), dtype=np.uint8))
     return arr
-
-
-def render_simulation(sim) -> None:
-    """Render the simulation with trucks."""
-    arr = simulation_to_rgb_array(sim, cell_size=10)
-    st.image(arr, use_container_width=True)
