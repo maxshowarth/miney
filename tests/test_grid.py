@@ -1,4 +1,6 @@
+import pytest
 from miney.grid import Grid, CellType
+from miney.ui import grid_to_color_matrix, CELL_COLORS
 
 
 def test_grid_initialization():
@@ -18,14 +20,8 @@ def test_set_and_get_cell():
 
 def test_out_of_bounds():
     grid = Grid()
-    try:
+    with pytest.raises(IndexError):
         grid.set_cell_type(100, 100, CellType.ROAD)
-    except IndexError:
-        pass
-    else:
-        assert False, "Expected IndexError for out-of-bounds coordinates"
-from miney.ui import grid_to_color_matrix, CELL_COLORS
-
 
 def test_grid_to_color_matrix():
     grid = Grid()
