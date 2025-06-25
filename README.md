@@ -34,7 +34,9 @@ If everything is working you should see a 50x50 grid rendered as a single
 image, not a matrix of buttons. A grey road runs across the middle row with a
 green cell at the far left (the load zone) and a red cell at the far right (the
 dump zone). The layout is loaded from `maps/simple_map.json` and can be replaced
-with other map files.
+with other map files. The interface also provides buttons to start or stop the
+simulation, reset all trucks, and spawn additional trucks. Truck positions are
+displayed on the grid as yellow squares.
 
 ## Testing
 Run unit tests with:
@@ -48,6 +50,9 @@ The `miney.simulation` module contains a simple truck engine. Trucks follow a
 pre-computed looped route from the load cell to the dump cell and back again.
 Each truck waits for a configurable number of ticks at the load and dump
 locations before continuing its journey.
+The Streamlit app visualizes the simulation in real time using yellow
+markers for trucks. Buttons allow you to start or stop the engine, add
+new trucks and reset the fleet.
 
 ## Project Details
 This project involves developing a Python-based, interactive 2D mine simulation application. The app models haul trucks moving between a loading ground and dumping ground on a user-defined road network within a 50×50 grid. The simulation will be visualized in a Streamlit or Gradio interface and allow basic controls (start, reset, add trucks). Truck motion is governed by pathfinding logic. This tool is intended for demonstration purposes and educational use.
