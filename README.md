@@ -43,6 +43,12 @@ Run unit tests with:
 pytest -q
 ```
 
+## Simulation
+The `miney.simulation` module contains a simple truck engine. Trucks follow a
+pre-computed looped route from the load cell to the dump cell and back again.
+Each truck waits for a configurable number of ticks at the load and dump
+locations before continuing its journey.
+
 ## Project Details
 This project involves developing a Python-based, interactive 2D mine simulation application. The app models haul trucks moving between a loading ground and dumping ground on a user-defined road network within a 50×50 grid. The simulation will be visualized in a Streamlit or Gradio interface and allow basic controls (start, reset, add trucks). Truck motion is governed by pathfinding logic. This tool is intended for demonstration purposes and educational use.
 
